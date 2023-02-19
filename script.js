@@ -62,3 +62,29 @@ function update() {
     // Update the grid
     grid = nextGrid;
 }
+
+// Draw the grid on the canvas
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+    for (let col = 0; col < columns; col++) {
+      for (let row = 0; row < rows; row++) {
+        const cell = grid[col][row];
+  
+        ctx.beginPath();
+        ctx.rect(col * resolution, row * resolution, resolution, resolution);
+        ctx.fillStyle = cell ? 'black' : 'white';
+        ctx.fill();
+        ctx.stroke();
+      }
+    }
+  }
+  
+// Run the game loop
+function gameLoop() {
+    update();
+    draw();
+    requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
